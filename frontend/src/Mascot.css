@@ -1,0 +1,544 @@
+/* ========================================
+   ColBee Mascot Component Styles
+   ======================================== */
+
+.mascot-container {
+  padding: 2rem 1rem;
+  border-radius: 16px;
+  margin: 1.5rem 0;
+  transition: all 0.5s ease-in-out;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.mascot-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* ========================================
+   ColBee 캐릭터 SVG 스타일
+   ======================================== */
+
+.colbee {
+  position: relative;
+  width: 180px;
+  height: 220px;
+  animation: gentle-float 3s ease-in-out infinite;
+}
+
+@keyframes gentle-float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* ========================================
+   날개 (Wings)
+   ======================================== */
+
+.wing {
+  position: absolute;
+  width: 60px;
+  height: 100px;
+  border: 2px solid;
+  border-radius: 50% 50% 50% 0;
+  opacity: 0.7;
+  transform-origin: center bottom;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.wing-left {
+  top: 30px;
+  left: -20px;
+  transform: rotate(-25deg);
+}
+
+.wing-right {
+  top: 30px;
+  right: -20px;
+  transform: scaleX(-1) rotate(-25deg);
+}
+
+/* 날개 애니메이션 - 안전 상태 (느리고 가볍게) */
+.wing.flap-light {
+  animation: flutter-light 2s ease-in-out infinite;
+}
+
+@keyframes flutter-light {
+  0%, 100% {
+    transform: rotate(-25deg);
+  }
+  25% {
+    transform: rotate(-35deg);
+  }
+  50% {
+    transform: rotate(-15deg);
+  }
+  75% {
+    transform: rotate(-30deg);
+  }
+}
+
+.wing-right.flap-light {
+  animation: flutter-light-right 2s ease-in-out infinite;
+}
+
+@keyframes flutter-light-right {
+  0%, 100% {
+    transform: scaleX(-1) rotate(-25deg);
+  }
+  25% {
+    transform: scaleX(-1) rotate(-35deg);
+  }
+  50% {
+    transform: scaleX(-1) rotate(-15deg);
+  }
+  75% {
+    transform: scaleX(-1) rotate(-30deg);
+  }
+}
+
+/* 날개 애니메이션 - 주의 상태 (중간 속도) */
+.wing.flap-medium {
+  animation: flutter-medium 1.2s ease-in-out infinite;
+}
+
+@keyframes flutter-medium {
+  0%, 100% {
+    transform: rotate(-25deg);
+  }
+  25% {
+    transform: rotate(-45deg);
+  }
+  50% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(-40deg);
+  }
+}
+
+.wing-right.flap-medium {
+  animation: flutter-medium-right 1.2s ease-in-out infinite;
+}
+
+@keyframes flutter-medium-right {
+  0%, 100% {
+    transform: scaleX(-1) rotate(-25deg);
+  }
+  25% {
+    transform: scaleX(-1) rotate(-45deg);
+  }
+  50% {
+    transform: scaleX(-1) rotate(-10deg);
+  }
+  75% {
+    transform: scaleX(-1) rotate(-40deg);
+  }
+}
+
+/* 날개 애니메이션 - 긴급 상태 (빠르고 강하게) */
+.wing.flap-fast {
+  animation: flutter-fast 0.4s ease-in-out infinite;
+}
+
+@keyframes flutter-fast {
+  0%, 100% {
+    transform: rotate(-25deg);
+  }
+  25% {
+    transform: rotate(-60deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(-55deg);
+  }
+}
+
+.wing-right.flap-fast {
+  animation: flutter-fast-right 0.4s ease-in-out infinite;
+}
+
+@keyframes flutter-fast-right {
+  0%, 100% {
+    transform: scaleX(-1) rotate(-25deg);
+  }
+  25% {
+    transform: scaleX(-1) rotate(-60deg);
+  }
+  50% {
+    transform: scaleX(-1) rotate(0deg);
+  }
+  75% {
+    transform: scaleX(-1) rotate(-55deg);
+  }
+}
+
+/* 긴급 상태 추가 애니메이션 (흔들림) */
+.colbee .no-flap + .no-flap {
+  /* 만료 상태에서는 날개 움직임 없음 */
+}
+
+/* ========================================
+   몸 (Body)
+   ======================================== */
+
+.body {
+  position: relative;
+  width: 140px;
+  height: 160px;
+  border-radius: 50% 50% 40% 40%;
+  border: 3px solid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  box-shadow: 
+    0 8px 16px rgba(0, 0, 0, 0.2),
+    inset 0 -2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* 노란색 줄무늬 (꿀벌 스타일) */
+.stripe {
+  position: absolute;
+  width: 100%;
+  height: 16px;
+  background: linear-gradient(90deg, transparent 0%, #FFC107 20%, #FFC107 80%, transparent 100%);
+  opacity: 0.6;
+}
+
+.stripe-1 {
+  top: 30%;
+}
+
+.stripe-2 {
+  top: 50%;
+}
+
+.stripe-3 {
+  top: 70%;
+}
+
+/* ========================================
+   얼굴 (Face)
+   ======================================== */
+
+.face {
+  position: absolute;
+  width: 90px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  z-index: 2;
+}
+
+/* 눈 */
+.eye {
+  width: 30px;
+  height: 30px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.eye-left {
+  margin-right: 15px;
+}
+
+.eye-right {
+  margin-left: 15px;
+}
+
+.eye-svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* 입 */
+.mouth {
+  width: 40px;
+  height: 25px;
+  position: relative;
+}
+
+.mouth-svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ========================================
+   상태 배지 (Status Badge)
+   ======================================== */
+
+.status-badge {
+  position: absolute;
+  bottom: -15px;
+  right: -15px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  animation: badge-bounce 0.8s ease-in-out infinite;
+  border: 3px solid white;
+}
+
+@keyframes badge-bounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* ========================================
+   메시지 말풍선 (Message Bubble)
+   ======================================== */
+
+.message-bubble {
+  max-width: 280px;
+  padding: 12px 16px;
+  background: white;
+  border: 2px solid;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  animation: bubble-fade-in 0.5s ease-out;
+}
+
+.message-bubble::before {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 20px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 0px solid transparent;
+  border-top: 10px solid white;
+}
+
+.message-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -7px;
+  left: 22px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 0px solid transparent;
+  border-top: 8px solid inherit;
+  border-top-color: currentColor;
+}
+
+.message-bubble p {
+  margin: 0;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+@keyframes bubble-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================
+   상태 카운트 표시 (Status Counts)
+   ======================================== */
+
+.status-counts {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 0 1rem;
+}
+
+.count-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.count-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.count-icon {
+  font-size: 18px;
+}
+
+.count-text {
+  font-weight: 700;
+  min-width: 20px;
+  text-align: center;
+}
+
+/* ========================================
+   반응형 디자인
+   ======================================== */
+
+@media (max-width: 768px) {
+  .mascot-container {
+    padding: 1.5rem 0.5rem;
+    margin: 1rem 0;
+  }
+
+  .colbee {
+    width: 150px;
+    height: 190px;
+  }
+
+  .body {
+    width: 120px;
+    height: 140px;
+    font-size: 14px;
+  }
+
+  .face {
+    width: 80px;
+    height: 90px;
+    gap: 12px;
+  }
+
+  .eye {
+    width: 24px;
+    height: 24px;
+  }
+
+  .message-bubble {
+    max-width: 240px;
+    font-size: 13px;
+    padding: 10px 14px;
+  }
+
+  .status-counts {
+    gap: 8px;
+  }
+
+  .count-item {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mascot-container {
+    padding: 1rem;
+  }
+
+  .colbee {
+    width: 120px;
+    height: 160px;
+  }
+
+  .body {
+    width: 100px;
+    height: 120px;
+  }
+
+  .face {
+    width: 70px;
+    height: 80px;
+    gap: 10px;
+  }
+
+  .eye {
+    width: 20px;
+    height: 20px;
+  }
+
+  .message-bubble {
+    max-width: 200px;
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  .status-counts {
+    gap: 6px;
+  }
+
+  .count-item {
+    padding: 5px 8px;
+    font-size: 11px;
+  }
+
+  .status-badge {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+}
+
+/* ========================================
+   접근성 (Accessibility)
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .colbee {
+    animation: none;
+  }
+
+  .wing,
+  .status-badge,
+  .message-bubble {
+    animation: none;
+  }
+
+  .count-item {
+    transition: none;
+  }
+}
+
+/* ========================================
+   다크 모드 지원
+   ======================================== */
+
+@media (prefers-color-scheme: dark) {
+  .message-bubble {
+    background: #2C3E50;
+    border-color: #FFC107;
+  }
+
+  .message-bubble p {
+    color: #FFC107;
+  }
+
+  .count-item {
+    opacity: 0.9;
+  }
+}
