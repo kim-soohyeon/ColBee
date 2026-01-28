@@ -1,10 +1,6 @@
 import React from 'react';
 import './Mascot.css';
 
-/**
- * ColBee Mascot Component - Front Facing Version
- * Combined side-profile aesthetics with front-facing layout and dynamic speed.
- */
 const Mascot = ({
     status = 'safe',
     safeCount = 0,
@@ -12,76 +8,76 @@ const Mascot = ({
     urgentCount = 0,
     expiredCount = 0
 }) => {
-
     const getMascotConfig = () => {
-        const baseYellow = '#FFDE67';
-        const darkBrown = '#4A3022';
-        const lightBlue = '#A7E2FF';
+        const colors = {
+            yellow: '#FFDE67',
+            brown: '#4A3022',
+            pink: '#FF9999',
+            blue: '#A7E2FF',
+            orange: '#FFB300',
+            gray: '#B0BEC5'
+        };
 
         switch (status) {
             case 'safe':
                 return {
-                    bodyColor: baseYellow,
-                    stripeColor: darkBrown,
-                    eyeType: 'happy',
-                    mouthType: 'smile',
-                    wingColor: lightBlue,
-                    message: '완벽해요! 너무 걱정하지 마세요 😊',
+                    bodyColor: colors.yellow,
+                    eyeType: 'happy-dot',
+                    mouthType: 'laugh',
+                    showCheeks: true,
+                    message: '냉장고 상태가 아주 좋아요! 최고예요 👍',
                     bgGradient: 'linear-gradient(135deg, #E8F5E9 0%, #FFFFFF 100%)',
                     flapClass: 'flap-slow'
                 };
             case 'warning':
                 return {
                     bodyColor: '#FFD54F',
-                    stripeColor: darkBrown,
-                    eyeType: 'worried', // Changed for more urgency
-                    mouthType: 'straight',
-                    wingColor: '#B3E5FC',
-                    message: '이제 서둘러야 해요. 며칠 남지 않았어요 😐',
+                    eyeType: 'worried-dot',
+                    mouthType: 'small-o',
+                    showCheeks: false, // Hide cheeks when pale
+                    showPaleFace: true,
+                    message: '유통기한이 다가오는 재료가 있어요... 😰',
                     bgGradient: 'linear-gradient(135deg, #FFF8E1 0%, #FFFFFF 100%)',
                     flapClass: 'flap-medium'
                 };
             case 'urgent':
                 return {
-                    bodyColor: '#FFB300',
-                    stripeColor: darkBrown,
-                    eyeType: 'concerned', // Swapped types for better feel
-                    mouthType: 'worried', // Open mouth for urgent
-                    wingColor: '#81D4FA',
-                    message: '급해요! 지금 바로 써야 해요 😰',
+                    bodyColor: colors.orange,
+                    eyeType: 'worried-dot',
+                    mouthType: 'small-o',
+                    showCheeks: true,
+                    showSweat: true,
+                    message: '급해요! 지금 바로 요리해 보세요! 😰',
                     bgGradient: 'linear-gradient(135deg, #FFEBEE 0%, #FFFFFF 100%)',
                     flapClass: 'flap-fast'
                 };
             case 'expired':
                 return {
-                    bodyColor: '#B0BEC5',
-                    stripeColor: '#546E7A',
-                    eyeType: 'sad',
-                    mouthType: 'sad',
-                    wingColor: '#CFD8DC',
-                    message: '안타깝지만 이제 안 돼요. 폐기하세요 😢',
+                    bodyColor: colors.gray,
+                    eyeType: 'sad-dot',
+                    mouthType: 'upside-down',
+                    showCheeks: false,
+                    message: '이런, 아쉽지만 상한 재료는 비워주세요 😢',
                     bgGradient: 'linear-gradient(135deg, #F5F5F5 0%, #FFFFFF 100%)',
-                    flapClass: 'flap-stop' // Changed from no-flap to ensure base styles apply
+                    flapClass: 'flap-stop'
                 };
             case 'inactive':
                 return {
                     bodyColor: '#ECEFF1',
-                    stripeColor: '#CFD8DC',
-                    eyeType: 'neutral',
+                    eyeType: 'neutral-dot',
                     mouthType: 'straight',
-                    wingColor: '#E1F5FE',
+                    showCheeks: false,
                     message: '냉장고가 비어있네요! 콜비는 쉬는 중... 💤',
                     bgGradient: 'linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%)',
-                    flapClass: 'no-flap'
+                    flapClass: 'flap-stop'
                 };
             default:
                 return {
-                    bodyColor: baseYellow,
-                    stripeColor: darkBrown,
-                    eyeType: 'happy',
-                    mouthType: 'smile',
-                    wingColor: lightBlue,
-                    message: '완벽해요!',
+                    bodyColor: colors.yellow,
+                    eyeType: 'happy-dot',
+                    mouthType: 'laugh',
+                    showCheeks: true,
+                    message: '안녕하세요! 콜비가 냉장고를 지켜요!',
                     bgGradient: 'linear-gradient(135deg, #E8F5E9 0%, #FFFFFF 100%)',
                     flapClass: 'flap-slow'
                 };
@@ -89,67 +85,84 @@ const Mascot = ({
     };
 
     const config = getMascotConfig();
+    const darkBrown = '#4A3022';
 
     return (
         <div className="mascot-container" style={{ background: config.bgGradient }}>
             <div className="mascot-wrapper">
                 <div className="front-colbee-container">
                     <svg viewBox="0 0 200 200" className="front-colbee-svg">
-                        {/* Wings - Left & Right */}
-                        <g className={`front-wings ${config.flapClass}`}>
-                            <ellipse cx="40" cy="80" rx="30" ry="20" fill={config.wingColor} opacity="0.8" stroke="#fff" strokeWidth="2" transform="rotate(-30 40 80)" />
-                            <ellipse cx="160" cy="80" rx="30" ry="20" fill={config.wingColor} opacity="0.8" stroke="#fff" strokeWidth="2" transform="rotate(30 160 80)" />
-                        </g>
-
-                        {/* Antennae */}
-                        <g className="front-antenna">
-                            <path d="M85 50 Q75 25 65 30" fill="none" stroke={config.stripeColor} strokeWidth="3" strokeLinecap="round" />
-                            <circle cx="65" cy="30" r="5" fill={config.bodyColor} stroke={config.stripeColor} strokeWidth="2" />
-
-                            <path d="M115 50 Q125 25 135 30" fill="none" stroke={config.stripeColor} strokeWidth="3" strokeLinecap="round" />
-                            <circle cx="135" cy="30" r="5" fill={config.bodyColor} stroke={config.stripeColor} strokeWidth="2" />
-                        </g>
-
-                        {/* Body (Round/Oval for front view) */}
-                        <circle cx="100" cy="110" r="70" fill={config.bodyColor} stroke={config.stripeColor} strokeWidth="1" />
-
-                        {/* Stripes (Horizontal for front view) */}
-                        <g clipPath="url(#frontBodyClip)">
-                            <rect x="30" y="85" width="140" height="15" fill={config.stripeColor} />
-                            <rect x="30" y="115" width="140" height="15" fill={config.stripeColor} />
-                            <rect x="30" y="145" width="140" height="15" fill={config.stripeColor} />
-                        </g>
-
-                        {/* Face - Eyes (Two eyes for front view) */}
-                        <g transform="translate(100, 100)">
-                            <g transform="translate(-25, 0)">
-                                {renderEye(config.eyeType, config.stripeColor, 'left')}
-                            </g>
-                            <g transform="translate(25, 0)">
-                                {renderEye(config.eyeType, config.stripeColor, 'right')}
-                            </g>
-                        </g>
-
-                        {/* Face - Mouth (Centered) */}
-                        <g transform="translate(100, 130)">
-                            {renderMouth(config.mouthType, config.stripeColor)}
-                        </g>
-
-                        {/* Clip Definition */}
                         <defs>
                             <clipPath id="frontBodyClip">
-                                <circle cx="100" cy="110" r="70" />
+                                <path d="M100 40 C60 40 30 70 30 115 C30 160 60 185 100 185 C140 185 170 160 170 115 C170 70 140 40 100 40 Z" />
                             </clipPath>
+                            <linearGradient id="paleGradient" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stopColor="#81D4FA" />
+                                <stop offset="100%" stopColor="transparent" />
+                            </linearGradient>
                         </defs>
+
+                        {/* Wings */}
+                        <g className={`front-wings ${config.flapClass}`}>
+                            <ellipse cx="45" cy="100" rx="35" ry="25" fill="#A7E2FF" opacity="0.6" stroke="#fff" strokeWidth="2" transform="rotate(-15 45 100)" />
+                            <ellipse cx="155" cy="100" rx="35" ry="25" fill="#A7E2FF" opacity="0.6" stroke="#fff" strokeWidth="2" transform="rotate(15 155 100)" />
+                        </g>
+
+                        {/* Antennae - 갈고리 모양 */}
+                        <g className="front-antenna">
+                            <path d="M80 60 Q70 20 50 35" fill="none" stroke={darkBrown} strokeWidth="5" strokeLinecap="round" />
+                            <path d="M120 60 Q130 20 150 35" fill="none" stroke={darkBrown} strokeWidth="5" strokeLinecap="round" />
+                        </g>
+
+                        {/* Body - 찐빵 형태의 얼굴형 */}
+                        <path d="M100 40 C60 40 30 70 30 115 C30 160 60 185 100 185 C140 185 170 160 170 115 C170 70 140 40 100 40 Z" fill={config.bodyColor} stroke={darkBrown} strokeWidth="2" />
+
+                        {/* Stripes */}
+                        <g clipPath="url(#frontBodyClip)">
+                            <rect x="20" y="105" width="160" height="22" fill={darkBrown} />
+                            <rect x="20" y="145" width="160" height="22" fill={darkBrown} />
+                        </g>
+
+                        {/* Pale Face Overlay - 주의/걱정 상황 */}
+                        {config.showPaleFace && (
+                            <g clipPath="url(#frontBodyClip)">
+                                <rect x="30" y="40" width="140" height="80" fill="url(#paleGradient)" opacity="0.6" />
+                            </g>
+                        )}
+
+                        {/* Cheeks - 발그레한 볼터치 */}
+                        {config.showCheeks && (
+                            <g opacity="0.4">
+                                <circle cx="60" cy="115" r="10" fill="#FF9999" />
+                                <circle cx="140" cy="115" r="10" fill="#FF9999" />
+                            </g>
+                        )}
+
+                        {/* Eyes */}
+                        <g transform="translate(100, 100)">
+                            <g transform="translate(-30, 0)">{renderEye(config.eyeType, darkBrown)}</g>
+                            <g transform="translate(30, 0)">{renderEye(config.eyeType, darkBrown)}</g>
+                        </g>
+
+                        {/* Sweat Drops - 긴급 상황 애니메이션 */}
+                        {config.showSweat && (
+                            <g className="sweat-drops">
+                                <path className="sweat-drop" d="M150 70 Q155 85 150 100" fill="none" stroke="#A7E2FF" strokeWidth="4" strokeLinecap="round" />
+                                <path className="sweat-drop" d="M165 80 Q170 95 165 110" fill="none" stroke="#A7E2FF" strokeWidth="3" strokeLinecap="round" opacity="0.7" />
+                            </g>
+                        )}
+
+                        {/* Mouth */}
+                        <g transform="translate(100, 130)">
+                            {renderMouth(config.mouthType, darkBrown)}
+                        </g>
                     </svg>
                 </div>
 
-                {/* Message Bubble */}
                 <div className="message-bubble" style={{ borderColor: config.bodyColor }}>
-                    <p style={{ color: config.stripeColor, fontWeight: 'bold' }}>{config.message}</p>
+                    <p style={{ color: darkBrown, fontWeight: 'bold', margin: 0 }}>{config.message}</p>
                 </div>
 
-                {/* Status Counts */}
                 <div className="status-counts">
                     {safeCount > 0 && <span className="count-item safe">🟢 {safeCount}</span>}
                     {warningCount > 0 && <span className="count-item warning">🟡 {warningCount}</span>}
@@ -161,62 +174,36 @@ const Mascot = ({
     );
 };
 
-const renderEye = (type, color, side) => {
+const renderEye = (type, color) => {
     switch (type) {
-        case 'happy':
+        case 'happy-dot':
+            return <circle cx="0" cy="0" r="7" fill={color} />;
+        case 'worried-dot':
             return (
                 <g>
-                    {/* Outline for visibility against stripes */}
-                    <path d="M -12 0 Q 0 -18 12 0" fill="none" stroke="#fff" strokeWidth="8" strokeLinecap="round" />
-                    <path d="M -12 0 Q 0 -18 12 0" fill="none" stroke={color} strokeWidth="5" strokeLinecap="round" />
+                    <path d="M -8 -10 Q 0 -15 8 -10" fill="none" stroke={color} strokeWidth="3" strokeLinecap="round" />
+                    <circle cx="0" cy="0" r="7" fill={color} />
                 </g>
             );
-        case 'sad':
-            return (
-                <g>
-                    <path d="M -12 -6 Q 0 10 12 -6" fill="none" stroke="#fff" strokeWidth="8" strokeLinecap="round" />
-                    <path d="M -12 -6 Q 0 10 12 -6" fill="none" stroke={color} strokeWidth="5" strokeLinecap="round" />
-                </g>
-            );
-        case 'neutral':
-            return (
-                <g>
-                    <line x1="-12" y1="0" x2="12" y2="0" stroke="#fff" strokeWidth="8" strokeLinecap="round" />
-                    <line x1="-12" y1="0" x2="12" y2="0" stroke={color} strokeWidth="5" strokeLinecap="round" />
-                </g>
-            );
-        case 'worried':
-            return (
-                <g>
-                    <circle cx="0" cy="0" r="11" fill="#fff" />
-                    <circle cx="0" cy="0" r="10" fill={color} />
-                    <circle cx="-3" cy="-3" r="3" fill="#fff" />
-                </g>
-            );
-        case 'concerned':
-            return (
-                <g>
-                    <circle cx="0" cy="0" r="10" fill="#fff" stroke={color} strokeWidth="3" />
-                    <circle cx="0" cy="3" r="4" fill={color} />
-                </g>
-            );
+        case 'sad-dot':
+            return <circle cx="0" cy="0" r="6" fill="#78909C" />;
+        case 'neutral-dot':
+            return <line x1="-8" y1="0" x2="8" y2="0" stroke={color} strokeWidth="4" strokeLinecap="round" />;
         default:
-            return <circle cx="0" cy="0" r="10" fill={color} />;
+            return <circle cx="0" cy="0" r="7" fill={color} />;
     }
 };
 
 const renderMouth = (type, color) => {
     switch (type) {
-        case 'smile':
-            return <path d="M -15 0 Q 0 15 15 0" fill="none" stroke={color} strokeWidth="4" strokeLinecap="round" />;
-        case 'straight':
-            return <line x1="-12" y1="5" x2="12" y2="5" stroke={color} strokeWidth="4" strokeLinecap="round" />;
-        case 'worried':
-            return <circle cx="0" cy="8" r="6" fill="none" stroke={color} strokeWidth="3" />;
-        case 'sad':
-            return <path d="M -12 12 Q 0 -2 12 12" fill="none" stroke={color} strokeWidth="4" strokeLinecap="round" />;
+        case 'laugh':
+            return <path d="M -15 0 Q 0 25 15 0 Z" fill="#FF8A80" stroke={color} strokeWidth="2" />;
+        case 'small-o':
+            return <ellipse cx="0" cy="5" rx="7" ry="9" fill="white" stroke={color} strokeWidth="2" />;
+        case 'upside-down':
+            return <path d="M -10 10 Q 0 0 10 10" fill="none" stroke={color} strokeWidth="3" strokeLinecap="round" />;
         default:
-            return <path d="M -15 0 Q 0 15 15 0" fill="none" stroke={color} strokeWidth="4" strokeLinecap="round" />;
+            return <path d="M -10 0 Q 0 10 10 0" fill="none" stroke={color} strokeWidth="3" strokeLinecap="round" />;
     }
 };
 
