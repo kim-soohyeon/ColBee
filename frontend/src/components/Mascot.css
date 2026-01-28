@@ -1,0 +1,168 @@
+/* ========================================
+   Front-Facing Mascot Styles
+   ======================================== */
+
+.front-colbee-container {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+}
+
+.front-colbee-svg {
+  width: 100%;
+  height: 100%;
+  animation: front-float 4s ease-in-out infinite;
+}
+
+@keyframes front-float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Wings Animation System */
+.front-wings ellipse {
+  transform-origin: center;
+  transition: all 0.3s ease;
+}
+
+/* Wing Flap Animations per Speed */
+.flap-slow ellipse {
+  animation: wing-flap-front 2s ease-in-out infinite alternate;
+}
+
+.flap-medium ellipse {
+  animation: wing-flap-front 0.8s ease-in-out infinite alternate;
+}
+
+.flap-fast ellipse {
+  animation: wing-flap-front 0.2s ease-in-out infinite alternate;
+}
+
+.no-flap ellipse,
+.flap-stop ellipse {
+  animation: none;
+  /* Ensure wings stay in natural position when stopped */
+  transform: scaleY(1) translateY(0) !important;
+}
+
+@keyframes wing-flap-front {
+  from {
+    transform: scaleY(1) translateY(0);
+  }
+
+  to {
+    transform: scaleY(0.6) translateY(5px);
+  }
+}
+
+.front-antenna {
+  animation: antenna-wiggle-front 3s ease-in-out infinite alternate;
+}
+
+@keyframes antenna-wiggle-front {
+  from {
+    transform: rotate(-2deg);
+  }
+
+  to {
+    transform: rotate(2deg);
+  }
+}
+
+/* Base Mascot Layout Styles (Maintained) */
+.mascot-container {
+  padding: 2rem 1rem;
+  border-radius: 20px;
+  margin: 1.5rem;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+}
+
+.mascot-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.message-bubble {
+  background: white;
+  padding: 1rem 1.5rem;
+  border-radius: 18px;
+  border: 3px solid;
+  position: relative;
+  max-width: 90%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  animation: pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.message-bubble::after {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 30px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 12px solid white;
+}
+
+@keyframes pop-in {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.status-counts {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.count-item {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.count-item.safe {
+  color: #4CAF50;
+  border: 1px solid #E8F5E9;
+}
+
+.count-item.warning {
+  color: #FF9800;
+  border: 1px solid #FFF8E1;
+}
+
+.count-item.urgent {
+  color: #F44336;
+  border: 1px solid #FFEBEE;
+}
+
+.count-item.expired {
+  color: #9E9E9E;
+  border: 1px solid #F5F5F5;
+}
